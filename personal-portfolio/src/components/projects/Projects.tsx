@@ -104,32 +104,32 @@ const Projects: React.FC<ProjectsProps> = ({ }) => {
     <div className="container mx-auto px-4">
       <motion.div
         ref={ref}
-        className="rounded-lg mx-auto w-full md:w-2/3 h-2/3 flex flex-wrap flex-col gap-y-4"
+        className="rounded-lg flex flex-col justify-between gap-y-4"
         initial="initial"
         animate={controls}
         variants={variants}
       >
-      <div className="flex flex-wrap gap-x-4">
+        <div className="flex flex-wrap gap-x-4">
+          <AnimatedProjectDescription
+            title="Project 1"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
+            className="flex-1 w-full md:w-2/5" 
+          />
+          <AnimatedProjectImage src="/0.png" alt="Project 2" className="w-1/3 md:w-1/2" />
+        </div>
         <AnimatedProjectDescription
-          title="Project 1"
+          title="Project 3"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-          className="flex-1 w-full md:w-1/2"
+          className="w-full"
         />
-        <AnimatedProjectImage src="/0.png" alt="Project 2" className="w-1/3 h-1/3" />
-      </div>
-      <AnimatedProjectDescription
-        title="Project 3"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-        className="w-full"
-      />
-      <div className="flex flex-wrap gap-x-4">
-        <AnimatedProjectImage src="/1.png" alt="Project 5" className="w-1/3 md:w-1/6" />
-        <AnimatedProjectDescription
-          title="Project 5"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-          className="flex-1 w-full md:w-1/2"
-        />
-      </div>
+        <div className="flex flex-wrap gap-x-4">
+          <AnimatedProjectImage src="/1.png" alt="Project 5" className="w-full md:w-1/2" />
+          <AnimatedProjectDescription
+            title="Project 5"
+            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
+            className="flex-1 w-full md:w-1/2"
+          />
+        </div>
         <div className="rounded-lg bg-gray-800 mx-auto w-full h-2/3 flex flex-col justify-between gap-y-4">
         </div>
         <div className="flex flex-wrap gap-x-4">
@@ -153,4 +153,3 @@ const Projects: React.FC<ProjectsProps> = ({ }) => {
 };
 
 export default Projects;
-
