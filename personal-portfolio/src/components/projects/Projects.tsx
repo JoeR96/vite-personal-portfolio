@@ -44,7 +44,7 @@ const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
       initial="initial"
       whileHover="hover"
       variants={hoverAnimation}
-      className={`bg-stone-700 rounded-lg p-6 ${className}`}
+      className={`bg-zinc-900 rounded-lg p-6 ${className}`}
     >
       <h2 className="text-4xl text-white font-bold mb-6">{title}</h2>
       <p className="text-xl text-white font-semibold">{description}</p>

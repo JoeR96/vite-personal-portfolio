@@ -14,7 +14,7 @@ const Card: React.FC<{
 
   return (
     <motion.div
-      className="bg-stone-700 rounded-lg p-4 shadow-md h-100 p-32"
+      className="bg-zinc-900 rounded-lg p-4 shadow-md h-100 p-32"
       initial="initial"
       whileHover="hover"
       variants={hoverAnimation}

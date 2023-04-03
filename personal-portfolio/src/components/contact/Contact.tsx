@@ -43,7 +43,7 @@ const Contact: React.FC<ContactProps> = ({}) => {
       initial={{ opacity: 0, y: -100 }}
       animate={controls}
     >
-      <div className="bg-stone-700 rounded-lg p-6">
+      <div className="bg-zinc-900 rounded-lg p-6">
         <h2 className="text-3xl text-white font-bold mb-6">Contact Me</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
