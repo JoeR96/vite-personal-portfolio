@@ -42,17 +42,17 @@ const Header: React.FC = () => {
         variants={variants}
       >
         <div className="p-6">
-        <SectionTitle text="Joe Richardson" size={48} weight="bold" color="white" />
+        <SectionTitle text="Joe Richardson" size={24} weight="bold" color="white" />
 </div>
 <div className="p-6">
-<SectionTitle text="Software Engineer" size={96} weight="bold" color="gradient" />
+<SectionTitle text="Software Engineer" size={48} weight="bold" color="gradient" />
 </div>
 
         <div className="w-3/4 mt-4">
           <Description
             text="AWS Fullstack .NET Engineer with experience in C# and JavaScript. Passionate about architectural and design patterns, object-oriented approaches, and developing testable solutions. A schwazzy dude who loves to push the boundaries of technology."
             color="#f1f5f9"
-            size={40}
+            size={20}
             weight="bold"
           />
         </div>

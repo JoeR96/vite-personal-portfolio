@@ -1,5 +1,16 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+
+const hoverAnimation = {
+  initial: { opacity: 1, scale: 1, zIndex: 0 },
+  hover: { opacity: 1, scale: 1.05, zIndex: 10, translateZ: 50, transition: { duration: 0.5 } },
+};
+
+const variants = {
+  initial: { opacity: 0, y: -100 },
+  animate: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
+};
 
 const Card: React.FC<{
   title: string;
@@ -7,11 +18,6 @@ const Card: React.FC<{
   bottomTitle: string;
   bulletPoints: string[];
 }> = ({ title, logoSrc, bottomTitle, bulletPoints }) => {
-  const hoverAnimation = {
-    initial: { opacity: 1, scale: 1, zIndex: 0 },
-    hover: { opacity: 1, scale: 1.05, zIndex: 10, translateZ: 50, transition: { duration: 0.5 } },
-  };
-
   return (
     <motion.div
       className="bg-zinc-900 rounded-lg p-4 shadow-md h-100 p-32"
@@ -25,6 +31,34 @@ const Card: React.FC<{
     </motion.div>
   );
 };
+
+const withParentAnimation = (Component: React.FC<any>) => {
+  return (props: any) => {
+    const controls = useAnimation();
+    const { ref, inView } = useInView({
+      threshold: 0.1,
+    });
+
+    useEffect(() => {
+      if (inView) {
+        controls.start('animate');
+      }
+    }, [controls, inView]);
+
+    return (
+      <motion.div
+        ref={ref}
+        initial="initial"
+        animate={controls}
+        variants={variants}
+      >
+        <Component {...props} />
+      </motion.div>
+    );
+  };
+};
+
+const AnimatedCard = withParentAnimation(Card);
 
 const CardContainer: React.FC = () => {
   const cards = [
@@ -52,7 +86,7 @@ const CardContainer: React.FC = () => {
     <div className="flex ">
       <div className="w-full grid grid-cols-3 gap-12 ">
         {cards.map((card, index) => (
-          <Card
+          <AnimatedCard
             key={index}
             title={card.title}
             logoSrc={card.logoSrc}
