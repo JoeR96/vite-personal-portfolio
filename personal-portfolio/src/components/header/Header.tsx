@@ -54,6 +54,7 @@ const Header: React.FC = () => {
             color="#f1f5f9"
             size={20}
             weight="bold"
+            hasImage={false}
           />
         </div>
       </motion.div>

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import Card from './Card';
-
+import UnityGame from '../unityComponent/Unity';
 interface ProjectsProps { }
 
 interface ProjectImageProps {
@@ -57,28 +57,51 @@ const ProjectImage: React.FC<ProjectImageProps> = ({ src, alt }) => {
       initial="initial"
       whileHover="hover"
       variants={hoverAnimation}
+      className="rounded-lg overflow-hidden"
     >
-      <img src={src} alt={alt} className="object-cover w-full h-full p-2 rounded-lg" />
+      <img src={src} alt={alt} className="object-cover w-full h-full p-1 rounded-lg" />
     </motion.div>
   );
 };
 
+
+
+interface ProjectDescriptionProps {
+  title: string;
+  description: string;
+  imgSrc: string;
+  imageOnLeft: boolean;
+  className?: string;
+}
+
 const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
   title,
   description,
+  imgSrc,
+  imageOnLeft,
+  className,
 }) => {
   return (
     <motion.div
       initial="initial"
       whileHover="hover"
       variants={hoverAnimation}
-      className="bg-zinc-900 rounded-lg p-6 flex-grow" // Add flex-grow here
+      className={`${className} bg-zinc-900 rounded-lg p-6 flex-grow h-full flex items-center`}
     >
-      <h2 className="text-4xl text-white font-bold mb-6">{title}</h2>
-      <p className="text-xl text-white font-semibold">{description}</p>
+      {imageOnLeft && (
+        <img src={imgSrc} alt="Project" className="w-60 h-60 mr-4 rounded-lg" />
+      )}
+      <div>
+        <h2 className="text-4xl text-white font-bold mb-6">{title}</h2>
+        <p className="text-xl text-white font-semibold">{description}</p>
+      </div>
+      {!imageOnLeft && (
+        <img src={imgSrc} alt="Project" className="w-60 h-60 ml-4 rounded-lg" />
+      )}
     </motion.div>
   );
 };
+
 
 
 const Projects: React.FC<ProjectsProps> = ({ }) => {
@@ -109,27 +132,46 @@ const Projects: React.FC<ProjectsProps> = ({ }) => {
         animate={controls}
         variants={variants}
       >
+           <div className="flex flex-wrap gap-x-4 items-stretch">
+        <AnimatedProjectDescription
+          title="Project 1"
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
+          className="flex-1 w-full m"
+          imgSrc="/Barbell.png"
+          imageOnLeft={false}
+        />
+        <div className="w-1/3 md:w-1/4 h-full">
+          <AnimatedProjectImage className="h-full" src="/0.png" alt="Project 2" />
+        </div>
         <div className="flex flex-wrap gap-x-4">
-          <AnimatedProjectDescription
-            title="Project 1"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-            className="flex-1 w-full md:w-2/5" 
-          />
-          <AnimatedProjectImage src="/0.png" alt="Project 2" className="w-1/3 md:w-1/2" />
+           <UnityGame></UnityGame>
+
+   </div>
+
+      </div>
+      <AnimatedProjectDescription
+        title="Project 3"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
+        className="w-full"
+        imgSrc="/Barbell.png"
+        imageOnLeft={false}
+        hasImage={false}
+      />
+      
+      <div className="flex flex-wrap gap-x-4">
+     
+        <div className="w-1/3 md:w-1/4 h-full">
+          <AnimatedProjectImage className="h-full" src="/0.png" alt="Project 2" />
         </div>
         <AnimatedProjectDescription
-          title="Project 3"
+          title="Project 1"
           description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-          className="w-full"
+          className="flex-1 w-full m"
+          imgSrc="/Guitar.png"
+          imageOnLeft={true}
         />
-        <div className="flex flex-wrap gap-x-4">
-          <AnimatedProjectImage src="/1.png" alt="Project 5" className="w-full md:w-1/2" />
-          <AnimatedProjectDescription
-            title="Project 5"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-            className="flex-1 w-full md:w-1/2"
-          />
-        </div>
+      </div>
+   
         <div className="rounded-lg bg-gray-800 mx-auto w-full h-2/3 flex flex-col justify-between gap-y-4">
         </div>
         <div className="flex flex-wrap gap-x-4">
@@ -150,6 +192,7 @@ const Projects: React.FC<ProjectsProps> = ({ }) => {
       </motion.div>
     </div>
   );
+  
 };
 
 export default Projects;
