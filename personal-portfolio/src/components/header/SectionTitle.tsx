@@ -22,4 +22,5 @@ const SectionTitle: React.FC<SectionTitleProps> = ({ text, size, weight, color }
   );
 };
 
+
 export default SectionTitle;
