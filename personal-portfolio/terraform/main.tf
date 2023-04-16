@@ -2,15 +2,6 @@ provider "aws" {
   region = "eu-west-1" # Replace with your desired AWS region
 }
 
-resource "aws_s3_bucket" "react_vite_bucket" {
-  bucket = "jr-personal-portfolio"
-  acl    = "public-read"
-
-  website {
-    index_document = "index.html"
-  }
-}
-
 resource "aws_s3_bucket_policy" "react_vite_bucket_policy" {
   bucket = aws_s3_bucket.react_vite_bucket.id
 
