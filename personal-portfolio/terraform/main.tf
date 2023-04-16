@@ -1,18 +1,29 @@
 provider "aws" {
   region = "eu-west-1" # Replace with your desired AWS region
 }
+locals {
+  bucket_exists = terraform.workspace == "default" ? false : true
+}
 
 resource "aws_s3_bucket" "react_vite_bucket" {
+  count = local.bucket_exists ? 0 : 1
+
   bucket = "jr-personal-portfolio"
   acl    = "public-read"
 
   website {
     index_document = "index.html"
   }
+
+  lifecycle {
+    prevent_destroy = false
+  }
 }
 
 resource "aws_s3_bucket_policy" "react_vite_bucket_policy" {
-  bucket = aws_s3_bucket.react_vite_bucket.id
+  count = local.bucket_exists ? 0 : 1
+
+  bucket = aws_s3_bucket.react_vite_bucket[0].id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -22,7 +33,7 @@ resource "aws_s3_bucket_policy" "react_vite_bucket_policy" {
         Effect    = "Allow"
         Principal = "*"
         Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.react_vite_bucket.arn}/*"
+        Resource  = "${aws_s3_bucket.react_vite_bucket[0].arn}/*"
       }
     ]
   })

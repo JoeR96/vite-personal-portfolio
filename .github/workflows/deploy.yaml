@@ -35,8 +35,16 @@ jobs:
       run: terraform init
       working-directory: personal-portfolio/terraform
 
+    - name: Terraform Import S3 Bucket
+      run: terraform import aws_s3_bucket.react_vite_bucket[0] jr-personal-portfolio
+      working-directory: personal-portfolio/terraform
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_EC2_METADATA_DISABLED: true
+
     - name: Terraform Import Bucket Policy
-      run: terraform import aws_s3_bucket_policy.react_vite_bucket_policy jr-personal-portfolio
+      run: terraform import aws_s3_bucket_policy.react_vite_bucket_policy[0] jr-personal-portfolio
       working-directory: personal-portfolio/terraform
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
