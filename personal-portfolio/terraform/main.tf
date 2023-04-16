@@ -9,10 +9,6 @@ resource "aws_s3_bucket" "react_vite_bucket" {
   website {
     index_document = "index.html"
   }
-
-  lifecycle {
-    prevent_destroy = false
-  }
 }
 
 resource "aws_s3_bucket_policy" "react_vite_bucket_policy" {
