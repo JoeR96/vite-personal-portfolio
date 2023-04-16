@@ -41,7 +41,7 @@ resource "aws_s3_bucket_policy" "react_vite_bucket_policy" {
 
 resource "aws_cloudfront_distribution" "react_vite_distribution" {
   origin {
-    domain_name = aws_s3_bucket.react_vite_bucket.website_domain
+    domain_name = aws_s3_bucket.react_vite_bucket[0].website_domain
     origin_id   = "react_vite_origin"
 
     custom_origin_config {
