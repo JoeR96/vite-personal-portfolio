@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React, {useEffect} from 'react';
+import {motion, useAnimation} from 'framer-motion';
+import {useInView} from 'react-intersection-observer';
 import Card from './Card';
 import UnityGame from '../unityComponent/Unity';
-interface ProjectsProps { }
+
+interface ProjectsProps {
+}
 
 interface ProjectImageProps {
-  src: string;
-  alt: string;
-  className?: string;
+    src: string;
+    alt: string;
+    className?: string;
 }
 
 interface ProjectDescriptionProps {
@@ -21,51 +23,51 @@ interface ProjectDescriptionProps {
 }
 
 const hoverAnimation = {
-  initial: { opacity: 1, scale: 1, zIndex: 0 },
-  hover: { opacity: 1, scale: 1.05, zIndex: 10, translateZ: 50, transition: { duration: 0.5 } },
+    initial: {opacity: 1, scale: 1, zIndex: 0},
+    hover: {opacity: 1, scale: 1.05, zIndex: 10, translateZ: 50, transition: {duration: 0.5}},
 };
 const variants = {
-  initial: { opacity: 0, y: -100 },
-  animate: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
+    initial: {opacity: 0, y: -100},
+    animate: {opacity: 1, y: 0, transition: {duration: 1, ease: 'easeOut'}},
 };
 const withParentAnimation = (Component: React.FC<any>) => {
-  return (props: any) => {
-    const controls = useAnimation();
-    const { ref, inView } = useInView({
-      threshold: 0.1,
-    });
+    return (props: any) => {
+        const controls = useAnimation();
+        const {ref, inView} = useInView({
+            threshold: 0.1,
+        });
 
-    useEffect(() => {
-      if (inView) {
-        controls.start('animate');
-      }
-    }, [controls, inView]);
+        useEffect(() => {
+            if (inView) {
+                controls.start('animate');
+            }
+        }, [controls, inView]);
 
-    return (
-      <motion.div
-        ref={ref}
-        initial="initial"
-        animate={controls}
-        variants={variants}
-        className={props.className} // Pass the className prop here
-      >
-        <Component {...props} />
-      </motion.div>
-    );
-  };
+        return (
+            <motion.div
+                ref={ref}
+                initial="initial"
+                animate={controls}
+                variants={variants}
+                className={props.className} // Pass the className prop here
+            >
+                <Component {...props} />
+            </motion.div>
+        );
+    };
 };
 
-const ProjectImage: React.FC<ProjectImageProps> = ({ src, alt }) => {
-  return (
-    <motion.div
-      initial="initial"
-      whileHover="hover"
-      variants={hoverAnimation}
-      className="rounded-lg overflow-hidden"
-    >
-      <img src={src} alt={alt} className="object-cover w-full h-full p-1 rounded-lg" />
-    </motion.div>
-  );
+const ProjectImage: React.FC<ProjectImageProps> = ({src, alt}) => {
+    return (
+        <motion.div
+            initial="initial"
+            whileHover="hover"
+            variants={hoverAnimation}
+            className="rounded-lg overflow-hidden"
+        >
+            <img src={src} alt={alt} className="object-cover w-full h-full p-1 rounded-lg"/>
+        </motion.div>
+    );
 };
 
 
@@ -99,6 +101,11 @@ const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
 };
 
 
+const Projects: React.FC<ProjectsProps> = ({}) => {
+    const controls = useAnimation();
+    const {ref, inView} = useInView({
+        threshold: 0.1,
+    });
 
 
 const Projects: React.FC<ProjectsProps> = ({ }) => {

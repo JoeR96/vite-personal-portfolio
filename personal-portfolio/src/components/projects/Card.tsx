@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React, {useEffect} from 'react';
+import {motion, useAnimation} from 'framer-motion';
+import {useInView} from 'react-intersection-observer';
 
 const hoverAnimation = {
   initial: { transform: 'rotateY(0deg)', zIndex: 0 },
@@ -8,8 +8,8 @@ const hoverAnimation = {
 };
 
 const variants = {
-  initial: { opacity: 0, y: -100 },
-  animate: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
+    initial: {opacity: 0, y: -100},
+    animate: {opacity: 1, y: 0, transition: {duration: 1, ease: 'easeOut'}},
 };
 const Card: React.FC<{
   title: string;
@@ -43,70 +43,70 @@ const Card: React.FC<{
 };
 
 const withParentAnimation = (Component: React.FC<any>) => {
-  return (props: any) => {
-    const controls = useAnimation();
-    const { ref, inView } = useInView({
-      threshold: 0.1,
-    });
+    return (props: any) => {
+        const controls = useAnimation();
+        const {ref, inView} = useInView({
+            threshold: 0.1,
+        });
 
-    useEffect(() => {
-      if (inView) {
-        controls.start('animate');
-      }
-    }, [controls, inView]);
+        useEffect(() => {
+            if (inView) {
+                controls.start('animate');
+            }
+        }, [controls, inView]);
 
-    return (
-      <motion.div
-        ref={ref}
-        initial="initial"
-        animate={controls}
-        variants={variants}
-      >
-        <Component {...props} />
-      </motion.div>
-    );
-  };
+        return (
+            <motion.div
+                ref={ref}
+                initial="initial"
+                animate={controls}
+                variants={variants}
+            >
+                <Component {...props} />
+            </motion.div>
+        );
+    };
 };
 
 const AnimatedCard = withParentAnimation(Card);
 
 const CardContainer: React.FC = () => {
-  const cards = [
-    {
-      title: 'Card 1',
-      logoSrc: 'https://via.placeholder.com/100x100.png?text=Logo',
-      bottomTitle: 'Title 1',
-      bulletPoints: ['Point 1', 'Point 2', 'Point 3'],
-    },
-    {
-      title: 'Card 2',
-      logoSrc: 'https://via.placeholder.com/100x100.png?text=Logo',
-      bottomTitle: 'Title 2',
-      bulletPoints: ['Point 4', 'Point 5', 'Point 6'],
-    },
-    {
-      title: 'Card 3',
-      logoSrc: 'https://via.placeholder.com/100x100.png?text=Logo',
-      bottomTitle: 'Title 3',
-      bulletPoints: ['Point 7', 'Point 8', 'Point 9'],
-    },
-  ];
+    const cards = [
+        {
+            title: 'Card 1',
+            logoSrc: 'https://via.placeholder.com/100x100.png?text=Logo',
+            bottomTitle: 'Title 1',
+            bulletPoints: ['Point 1', 'Point 2', 'Point 3'],
+        },
+        {
+            title: 'Card 2',
+            logoSrc: 'https://via.placeholder.com/100x100.png?text=Logo',
+            bottomTitle: 'Title 2',
+            bulletPoints: ['Point 4', 'Point 5', 'Point 6'],
+        },
+        {
+            title: 'Card 3',
+            logoSrc: 'https://via.placeholder.com/100x100.png?text=Logo',
+            bottomTitle: 'Title 3',
+            bulletPoints: ['Point 7', 'Point 8', 'Point 9'],
+        },
+    ];
 
-  return (
-    <div className="flex ">
-      <div className="w-full grid grid-cols-3 gap-12 ">
-        {cards.map((card, index) => (
-          <AnimatedCard
-            key={index}
-            title={card.title}
-            logoSrc={card.logoSrc}
-            bottomTitle={card.bottomTitle}
-            bulletPoints={card.bulletPoints}
-          />
-        ))}
-      </div>
-    </div>
-  );
+    return (
+        <div className="flex ">
+            <div className="w-full grid grid-cols-3 gap-12 ">
+                {cards.map((card, index) => (
+                    <AnimatedCard
+                        key={index}
+                        title={card.title}
+                        logoSrc={card.logoSrc}
+                        bottomTitle={card.bottomTitle}
+                        bulletPoints={card.bulletPoints}
+                    />
+                ))}
+            </div>
+        </div>
+    );
 };
 
 export default CardContainer;
