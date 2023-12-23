@@ -26,7 +26,7 @@ const Header: React.FC = () => {
 
   
   return (
-    <div className="h-screen bg-black flex flex-col items-center">
+    <div className="h-screen flex-col items-center">
       <ImageContainer>
         <BackgroundImage
           src="https://source.unsplash.com/random?software"

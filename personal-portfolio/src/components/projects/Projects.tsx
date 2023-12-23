@@ -14,8 +14,12 @@ interface ProjectImageProps {
 interface ProjectDescriptionProps {
   title: string;
   description: string;
+  imgSrc: string;
+  imageOnLeft?: boolean;
   className?: string;
+  hideImage?: boolean;
 }
+
 const hoverAnimation = {
   initial: { opacity: 1, scale: 1, zIndex: 0 },
   hover: { opacity: 1, scale: 1.05, zIndex: 10, translateZ: 50, transition: { duration: 0.5 } },
@@ -65,21 +69,13 @@ const ProjectImage: React.FC<ProjectImageProps> = ({ src, alt }) => {
 };
 
 
-
-interface ProjectDescriptionProps {
-  title: string;
-  description: string;
-  imgSrc: string;
-  imageOnLeft: boolean;
-  className?: string;
-}
-
 const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
   title,
   description,
   imgSrc,
   imageOnLeft,
   className,
+  hideImage = false, // Add a default value of false for the new prop
 }) => {
   return (
     <motion.div
@@ -88,19 +84,20 @@ const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
       variants={hoverAnimation}
       className={`${className} bg-zinc-900 rounded-lg p-6 flex-grow h-full flex items-center`}
     >
-      {imageOnLeft && (
+      {imageOnLeft && !hideImage && (
         <img src={imgSrc} alt="Project" className="w-60 h-60 mr-4 rounded-lg" />
       )}
       <div>
         <h2 className="text-4xl text-white font-bold mb-6">{title}</h2>
         <p className="text-xl text-white font-semibold">{description}</p>
       </div>
-      {!imageOnLeft && (
+      {!imageOnLeft && !hideImage && (
         <img src={imgSrc} alt="Project" className="w-60 h-60 ml-4 rounded-lg" />
       )}
     </motion.div>
   );
 };
+
 
 
 
@@ -143,20 +140,10 @@ const Projects: React.FC<ProjectsProps> = ({ }) => {
         <div className="w-1/3 md:w-1/4 h-full">
           <AnimatedProjectImage className="h-full" src="/0.png" alt="Project 2" />
         </div>
-        <div className="flex flex-wrap gap-x-4">
-           <UnityGame></UnityGame>
 
-   </div>
 
-      </div>
-      <AnimatedProjectDescription
-        title="Project 3"
-        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-        className="w-full"
-        imgSrc="/Barbell.png"
-        imageOnLeft={false}
-        hasImage={false}
-      />
+        </div>
+
       
       <div className="flex flex-wrap gap-x-4">
      
@@ -171,24 +158,6 @@ const Projects: React.FC<ProjectsProps> = ({ }) => {
           imageOnLeft={true}
         />
       </div>
-   
-        <div className="rounded-lg bg-gray-800 mx-auto w-full h-2/3 flex flex-col justify-between gap-y-4">
-        </div>
-        <div className="flex flex-wrap gap-x-4">
-          <AnimatedProjectDescription
-            title="Project 6"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-            className="flex-1 w-full md:w-1/2"
-          />
-          <AnimatedProjectDescription
-            title="Project 7"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-            className="flex-1 w-full md:w-1/2"
-          />
-        </div>
-        <div className='p-8'>
-          <Card></Card>
-        </div>
       </motion.div>
     </div>
   );

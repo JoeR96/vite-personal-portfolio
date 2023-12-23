@@ -17,14 +17,13 @@ function App() {
   };
 
   return (
-    <div className="bg-black w-full min-h-screen">
+    <div className="w-3/5 mx-auto">
       <div className="flex flex-col">
         <Header />
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="w-full h-full"
         >
           <motion.div variants={childVariants}>
             <Projects />
