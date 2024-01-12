@@ -10,9 +10,8 @@ import SquareAnimation from './components/SquareAnimation';
 
 function App() {
     return (
-        <div className="w-3/5 mx-auto">
 
-<div className="flex flex-col">
+<div >
                 <Header />
                 <SquareAnimation />
                 <Header />
@@ -22,7 +21,6 @@ s
 
                 <Contact />
 
-        </div>
         </div>
 
     );

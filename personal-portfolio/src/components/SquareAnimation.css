@@ -1,23 +1,23 @@
 .container {
     position: relative;
-    height: 200vh; /* Increased height for more scrolling area */
+    height: 200vh; /* Adjust as needed to allow for scrolling */
+    width: 100%;
+    max-width: fill;
 }
 
 .square {
-    position: fixed;
-    top: 50%; /* Center vertically */
+    position: absolute;
+    top: 50%;
     width: 50px;
     height: 50px;
     background-color: blue;
-    transition: transform 0.3s ease; /* Smooth transition for movement */
+    transition: all 0.3s ease; /* Smooth transition for movement */
 }
 
 .left {
     left: 50%; /* Start from the middle */
-    transform: translateX(-50%);
 }
 
 .right {
     right: 50%; /* Start from the middle */
-    transform: translateX(50%);
 }

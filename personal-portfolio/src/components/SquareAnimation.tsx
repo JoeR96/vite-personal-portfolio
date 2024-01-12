@@ -1,33 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import './SquareAnimation.css'; // Import the CSS file
+import React, { useEffect, useState, useRef } from 'react';
+import './SquareAnimation.css';
 
 const SquareAnimation = () => {
-    const [scrollPercentage, setScrollPercentage] = useState(0);
+    const containerRef = useRef(null);
+    const [animationProgress, setAnimationProgress] = useState(0);
 
     const handleScroll = () => {
-        const windowHeight = window.innerHeight;
-        const scrollY = window.scrollY;
-        const scrollHeight = document.body.scrollHeight;
+        if (!containerRef.current) return;
 
-        // Calculate the scroll percentage
-        const percentage = Math.min(100, Math.max(0, (scrollY / (scrollHeight - windowHeight)) * 100));
-        
-        // Set the percentage for the animation
-        setScrollPercentage(percentage);
+        const containerRect = containerRef.current.getBoundingClientRect();
+        const containerTop = containerRect.top;
+        const containerHeight = containerRect.height;
+        const windowHeight = window.innerHeight;
+
+        // Calculate the vertical center of the component
+        const containerCenter = containerTop + containerHeight / 2;
+        // Calculate the distance from the center of the viewport to the center of the component
+        const distanceFromCenter = Math.abs(windowHeight / 2 - containerCenter);
+
+        // Determine the animation progress based on how close the center of the component is to the center of the viewport
+        let progress = 1 - Math.min(distanceFromCenter / (windowHeight / 2), 1);
+        setAnimationProgress(progress);
     };
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Initial check
 
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
 
+    // Calculate the position of the squares based on the animation progress
+    const squarePosition = (50 - 50 * animationProgress) + '%';
+
     return (
-        <div className="container">
-            <div className="square left" style={{ transform: `translateX(${(-50 + 50 * (scrollPercentage / 100))}%)` }} />
-            <div className="square right" style={{ transform: `translateX(${(50 - 50 * (scrollPercentage / 100))}%)` }} />
+        <div className="container" ref={containerRef}>
+            <div className="square left" style={{ left: squarePosition }} />
+            <div className="square right" style={{ right: squarePosition }} />
         </div>
     );
 };
