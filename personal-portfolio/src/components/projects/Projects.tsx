@@ -100,75 +100,63 @@ const ProjectDescription: React.FC<ProjectDescriptionProps> = ({
   );
 };
 
-
 const Projects: React.FC<ProjectsProps> = ({}) => {
     const controls = useAnimation();
-    const {ref, inView} = useInView({
+    const { ref, inView } = useInView({
         threshold: 0.1,
     });
 
+    const variants = {
+        initial: { opacity: 0, y: -100 },
+        animate: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
+    };
 
-const Projects: React.FC<ProjectsProps> = ({ }) => {
-  const controls = useAnimation();
-  const { ref, inView } = useInView({
-    threshold: 0.1,
-  });
+    useEffect(() => {
+        if (inView) {
+            controls.start('animate');
+        }
+    }, [controls, inView]);
 
-  const variants = {
-    initial: { opacity: 0, y: -100 },
-    animate: { opacity: 1, y: 0, transition: { duration: 1, ease: 'easeOut' } },
-  };
+    const AnimatedProjectImage = withParentAnimation(ProjectImage);
+    const AnimatedProjectDescription = withParentAnimation(ProjectDescription);
 
-  useEffect(() => {
-    if (inView) {
-      controls.start('animate');
-    }
-  }, [controls, inView]);
-  const AnimatedProjectImage = withParentAnimation(ProjectImage);
-  const AnimatedProjectDescription = withParentAnimation(ProjectDescription);
+    return (
+        <div className="container mx-auto px-4">
+            <motion.div
+                ref={ref}
+                className="rounded-lg flex flex-col justify-between gap-y-4"
+                initial="initial"
+                animate={controls}
+                variants={variants}
+            >
+                <div className="flex flex-wrap gap-x-4 items-stretch">
+                    <AnimatedProjectDescription
+                        title="Project 1"
+                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
+                        className="flex-1 w-full m"
+                        imgSrc="/Barbell.png"
+                        imageOnLeft={false}
+                    />
+                    <div className="w-1/3 md:w-1/4 h-full">
+                        <AnimatedProjectImage className="h-full" src="/0.png" alt="Project 2" />
+                    </div>
+                </div>
 
-  return (
-    <div className="container mx-auto px-4">
-      <motion.div
-        ref={ref}
-        className="rounded-lg flex flex-col justify-between gap-y-4"
-        initial="initial"
-        animate={controls}
-        variants={variants}
-      >
-           <div className="flex flex-wrap gap-x-4 items-stretch">
-        <AnimatedProjectDescription
-          title="Project 1"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-          className="flex-1 w-full m"
-          imgSrc="/Barbell.png"
-          imageOnLeft={false}
-        />
-        <div className="w-1/3 md:w-1/4 h-full">
-          <AnimatedProjectImage className="h-full" src="/0.png" alt="Project 2" />
+                <div className="flex flex-wrap gap-x-4">
+                    <div className="w-1/3 md:w-1/4 h-full">
+                        <AnimatedProjectImage className="h-full" src="/0.png" alt="Project 2" />
+                    </div>
+                    <AnimatedProjectDescription
+                        title="Project 1"
+                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
+                        className="flex-1 w-full m"
+                        imgSrc="/Guitar.png"
+                        imageOnLeft={true}
+                    />
+                </div>
+            </motion.div>
         </div>
-
-
-        </div>
-
-      
-      <div className="flex flex-wrap gap-x-4">
-     
-        <div className="w-1/3 md:w-1/4 h-full">
-          <AnimatedProjectImage className="h-full" src="/0.png" alt="Project 2" />
-        </div>
-        <AnimatedProjectDescription
-          title="Project 1"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis mauris ac bibendum luctus. Maecenas vel arcu et nibh volutpat dictum. Vivamus feugiat risus vel tristique lobortis. Praesent vel malesuada lorem."
-          className="flex-1 w-full m"
-          imgSrc="/Guitar.png"
-          imageOnLeft={true}
-        />
-      </div>
-      </motion.div>
-    </div>
-  );
-  
+    );
 };
 
 export default Projects;
