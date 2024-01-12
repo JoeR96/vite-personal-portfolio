@@ -11,16 +11,11 @@ import SquareAnimation from './components/SquareAnimation';
 function App() {
     return (
 
-<div >
-                <Header />
-                <SquareAnimation />
-                <Header />
-
-s
-
-
-                <Contact />
-
+        <div>
+            <Header />
+            <SquareAnimation />
+            <Header />
+            <Contact />
         </div>
 
     );

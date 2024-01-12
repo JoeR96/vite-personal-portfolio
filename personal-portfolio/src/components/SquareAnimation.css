@@ -1,6 +1,6 @@
 .container {
     position: relative;
-    height: 200vh; /* Adjust as needed to allow for scrolling */
+    height: 50vh; /* Adjust as needed to allow for scrolling */
     width: 100%;
     max-width: fill;
 }
@@ -20,4 +20,21 @@
 
 .right {
     right: 50%; /* Start from the middle */
+}
+.content-container {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 80%; /* Adjust based on your preference */
+    max-width: 600px; /* Maximum width */
+    text-align: center;
+    padding-top: 200px;
+}
+
+.dummy-content {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: lightgray;
+    border: 1px solid #ddd;
 }
